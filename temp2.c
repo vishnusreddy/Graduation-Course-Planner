@@ -38,6 +38,7 @@ void DFS(struct Graph* graph, int vertex, int time) {
         
         graph->visited[vertex] = 1;
         time++;
+        graph->depart[(time)]=vertex;
     
         while(temp!=NULL) {
             int connectedVertex = temp->vertex;
@@ -47,7 +48,7 @@ void DFS(struct Graph* graph, int vertex, int time) {
             }
             temp = temp->next;
         }
-        graph->depart[(time)]=vertex;
+        
         time++;       
 }
 void doTopologicalSort(struct Graph* graph, int n)
@@ -95,9 +96,9 @@ struct Graph* createGraph(int vertices)
 void addEdge(struct Graph* graph, int src, int dest)
 {
     // Add edge from src to dest
-    struct node* newNode = createNode(dest);
-    newNode->next = graph->adjLists[src];
-    graph->adjLists[src] = newNode;
+    struct node* newNode = createNode(src);
+    newNode->next = graph->adjLists[dest];
+    graph->adjLists[dest] = newNode;
 }
  
 void printGraph(struct Graph* graph)

@@ -25,7 +25,7 @@ int main()
     addEdge(graph, 2, 3);
     
     printGraph(graph);
-    DFS(graph, 2);
+    DFS(graph, 0);
     
     return 0;
 }
@@ -76,6 +76,11 @@ void addEdge(struct Graph* graph, int src, int dest)
     struct node* newNode = createNode(dest);
     newNode->next = graph->adjLists[src];
     graph->adjLists[src] = newNode;
+ 
+    // Add edge from dest to src
+    newNode = createNode(src);
+    newNode->next = graph->adjLists[dest];
+    graph->adjLists[dest] = newNode;
 }
  
 void printGraph(struct Graph* graph)
