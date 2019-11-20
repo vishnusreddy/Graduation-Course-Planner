@@ -7,6 +7,7 @@
 //Stack Functions
 int top = -1;
 int stack[60];
+int count=0;
 void push(int arr[], int ele)
 {
     arr[++top] = ele;
@@ -63,7 +64,7 @@ void addEdge(struct Graph *graph, int src, int dest)
     newNode->next = graph->adjLists[dest];
     graph->adjLists[dest] = newNode;
 }
-void topologicalSortUtil(int v, Graph *g)
+void dfs(int v, Graph *g)
 {
     g->visited[v] = true;
     struct node *adjList = g->adjLists[v];
@@ -73,39 +74,56 @@ void topologicalSortUtil(int v, Graph *g)
         int connectedVertex = adjList->vertex;
         if (!g->visited[connectedVertex])
         {
-            topologicalSortUtil(connectedVertex, g);
+            dfs(connectedVertex, g);
         }
         adjList = adjList->next;
     }
     push(stack, v);
+    count++;
 }
 void topologicalSort(Graph *g)
 {
     for (int i = 0; i < g->numVertices; i++)
         if (g->visited[i] == false)
-            topologicalSortUtil(i, g);
+            dfs(i, g);
    
 }
+
 //Main Function to call all other functions
 int main()
 {
-    Graph *graph = createGraph(6);
-    addEdge(graph, 5, 2);
-    addEdge(graph, 5, 0);
-    addEdge(graph, 4, 0);
-    addEdge(graph, 4, 1);
-    addEdge(graph, 2, 3);
-    addEdge(graph, 3, 1);
-    topologicalSort(graph);
-    int count=0;
-    while (1)
+    int numberofsubjects;
+    printf("Enter the number of subjects :\n");
+    scanf("%d",&numberofsubjects);
+
+    Graph *graph = createGraph(numberofsubjects);
+    printf("Enter the prerequisite in case there is any.");
+    printf("Enter -1 -1 to end.\n");
+    while(1)
     {
-        printf("%d ", pop(stack));
-        if(count==60)
+        int a,b;
+        printf("Enter subject code and its pre-requisite :\n");
+        scanf("%d %d",&a,&b);
+        if(a==-1)
         {
             break;
         }
-        count++;
-        
+        addEdge(graph,b,a);
+
+    }
+    topologicalSort(graph);
+    int n=0;
+    int *arr=malloc(count*sizeof(int));
+    for(int i=0;i<count;i++)
+    {
+        arr[i]=pop(stack);
+    }
+    int j=0;
+    for(int i=count-1;i>=0;i--)
+    {
+        if(j%4==0)
+        printf("\n");
+        printf("%d ",arr[i]);
+        j++;
     }
 }
