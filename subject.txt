@@ -1,8 +1,21 @@
+These are the subjects offered : 
+
 Physics, Mathematics 1, Python, Electrical Engineering, Mechanical Engineering
+
 Chemistry, Mathematics 2, C, Electronic Engineering, Mechanics, Biotechnology
+
 Digital Design and Computer Organization, Data Structures, Introduction to Data Science, Web Techonologies 1, Discrete Mathematics and Logic, Special Topic 1
+
 Linear Algebra and It's Application, Design and Analysis of Algorithms, Data Base Management Systems, Microprocessor and Computer Architecture, Theory of Computation, Special Topic 2
+
 Computer Networks, Introduction to Operating Systems, Principles of Programming Languages
+
 Advanced Algorithms, Advanded Data Base Management Systems, Big Data, Multimedia Computing
+
 Information Security, Web Services, Algorithms for Intelligent Web
+
+
 Enter the number of subjects:
+User Input required here.
+
+Now the dependencies:
